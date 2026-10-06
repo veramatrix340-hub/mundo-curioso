@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Curioso</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .sub {
+            padding: 4rem 1rem;
+            background: #ffffff;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            margin-top: auto;
+        }
+        .wrap {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+        p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+        form {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        input[type="email"] {
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.375rem;
+            flex: 1;
+            min-width: 240px;
+        }
+        .btn {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+        .btn:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+        #ok {
+            margin-top: 1rem;
+            font-weight: 500;
+            color: #16a34a;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .opt-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+        .opt-btn[aria-pressed="true"] {
+            background: #2563eb;
+            color: white;
+        }
+        #out {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+  <header style="padding: 2rem; text-align: center;">
+    <h1>Mundo Curioso</h1>
+    <div class="options">
+      <button class="opt-btn" data-t="Mundo" aria-pressed="true">Mundo</button>
+      <button class="opt-btn" data-t="Ciencia" aria-pressed="false">Ciencia</button>
+      <button class="opt-btn" data-t="Historia" aria-pressed="false">Historia</button>
+    </div>
+    <div id="out"><b>Mundo.</b> Explora los datos más sorprendentes del planeta.</div>
+  </header>
+
+  <main>
+    <section class="sub" id="suscribirme">
+      <div class="wrap">
+        <h2>Que lo curioso te llegue primero</h2>
+        <p>Deja tu correo y recibe el resumen diario de Mundo Curioso.</p>
+        
+        <!-- Formulario adaptado -->
+        <form id="f" name="suscripcion" method="POST">
+          <input type="email" name="email" required placeholder="tu@correo.com" aria-label="Correo electrónico">
+          <button class="btn" type="submit">Recibir noticias</button>
+        </form>
+        
+        <div id="ok" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function() {
+      var txt = {
+        'Mundo': 'Explora los datos más sorprendentes del planeta.',
+        'Ciencia': 'Descubre los misterios y avances del conocimiento científico.',
+        'Historia': 'Viaja al pasado para conocer los eventos más insólitos de la humanidad.'
+      };
+      var bs = document.querySelectorAll('.opt-btn');
+      var out = document.getElementById('out');
+
+      function pick(t) {
+        bs.forEach(function(b) {
+          b.setAttribute('aria-pressed', b.dataset.t === t);
+        });
+        out.innerHTML = '<b>' + t + '.</b> ' + txt[t];
+      }
+
+      bs.forEach(function(b) {
+        b.onclick = function() {
+          pick(b.dataset.t);
+        };
+      });
+
+      /* Manejo simulado del formulario para Vercel (frontend estático) */
+      var form = document.getElementById('f');
+      if (form) {
+        form.onsubmit = function(e) {
+          e.preventDefault();
+          var ok = document.getElementById('ok'),
+              btn = form.querySelector('button');
+          
+          btn.disabled = true;
+          ok.style.color = '#16a34a';
+          ok.textContent = '¡Listo! Pronto recibirás Mundo Curioso en tu correo.';
+          form.reset();
+          btn.disabled = false;
+        };
+      }
+    })();
+  </script>
+</body>
+</html>
+```[cite: 1]
+
+Una vez guardado tu archivo `index.html`, guárdalo en tu repositorio de GitHub con estos comandos en tu terminal:
+```bash
+git add index.html
+git commit -m "Añadir archivo index.html"
+git push origin main

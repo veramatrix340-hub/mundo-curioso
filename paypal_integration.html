@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago con PayPal</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full text-center">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">Completar Pago</h1>
+        <p class="text-gray-600 mb-6">Haz clic en el botón de abajo para procesar tu pago de forma segura con PayPal.</p>
+
+        <!-- Contenedor requerido para el botón alojado de PayPal -->
+        <div id="paypal-container-RERZ9LUVN7RQS"></div>
+
+        <!-- Script del SDK de PayPal -->
+        <script 
+          src="https://www.paypal.com/sdk/js?client-id=BAAXsyKmfV4UgMJ5xM0lliOk3KRDHt5G5MHL9_IAzeQm3WuHHXHVLCOjgpb7WJwyZxpj3ckITL1-j2wbAo&components=hosted-buttons&disable-funding=venmo&currency=USD">
+        </script>
+
+        <script>
+          // Renderizar el botón alojado de PayPal
+          paypal.HostedButtons({
+            hostedButtonId: "RERZ9LUVN7RQS", // Reemplaza este ID con tu ID de botón real si es necesario
+          }).render("#paypal-container-RERZ9LUVN7RQS");
+        </script>
+    </div>
+
+</body>
+</html>
